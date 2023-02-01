@@ -73,15 +73,27 @@ logo = detect_logos2(path)
 
 print(logo)
 
-company = logo + " Company"
+company = logo
 
 print(company)
 
 try:
-    x = wikipedia.summary(company, auto_suggest=True)
+    x = wikipedia.summary(company + " (company)", auto_suggest=True)
     print(x)
 except:
-    print("No page found")
+    try:
+        x = wikipedia.summary(company + " (company)", auto_suggest=False)
+        print(x)
+    except:
+        try: 
+            x = wikipedia.summary(company, auto_suggest=True)
+            print(x)
+        except:
+            try:
+                x = wikipedia.summary(company, auto_suggest=False)
+                print(x)
+            except:
+                print("No page found")
 
 exit(0)
 
